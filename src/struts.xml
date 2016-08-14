@@ -9,7 +9,8 @@
 		<action name="product_*" class="com.aaa.action.ProductAction" method="{1}"></action>
 	</package> -->
 	
-	<!-- 建议用spring注入的action，由spring创建的action可以进行aop管理 -->
+	<!-- 建议用spring注入的action，由spring创建的action可以进行aop管理，action的class指向
+			applicationContext.xml的bean中的id -->
 	<package name="staff-ssh" extends="struts-default" namespace="/">
 		<action name="product_*" class="productAction" method="{1}"></action>
 	</package>

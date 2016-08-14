@@ -39,6 +39,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	
 	<!-- 配置action的类 -->
 	<bean id="productAction" class="com.aaa.action.ProductAction" scope="prototype">
 		<property name="productService" ref="productService"></property>
