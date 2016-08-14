@@ -8,6 +8,37 @@
 			http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 			http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 			http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+			
+	<!-- 引入外部文件的属性 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- 配置连接池，引入了c3p0-0.9.2.1.jar包 -->
+	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+	<!-- 配置hibernate的相关属性 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 配置hibernate的属性,/Users/wangguigen/MySofts/hibernate-release-4.3.11.Final/project/etc/hibernate.properties
+				中有myslq的dialect配置 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 加载hibernate中的映射文件，mappingResources是一个数组类型，所以用list -->
+		<property name="mappingResources">
+			<list>
+				<value>com/aaa/domain/Product.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
 	<!-- 配置action的类 -->
 	<bean id="productAction" class="com.aaa.action.ProductAction" scope="prototype">
 		<property name="productService" ref="productService"></property>
