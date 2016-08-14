@@ -8,6 +8,10 @@
 			http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 			http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 			http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 配置action的类 -->
+	<bean id="productAction" class="com.aaa.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
 	<!-- 配置业务层的类 -->		
 	<bean id="productService" class="com.aaa.service.ProductService">
 		<property name="productDao" ref="productDao"></property>

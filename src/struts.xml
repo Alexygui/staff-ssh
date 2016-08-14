@@ -5,7 +5,12 @@
 
 <struts>
 	<!-- struts2自身创建action -->
-	<package name="staff-ssh" extends="struts-default" namespace="/">
+	<!-- <package name="staff-ssh" extends="struts-default" namespace="/">
 		<action name="product_*" class="com.aaa.action.ProductAction" method="{1}"></action>
+	</package> -->
+	
+	<!-- 建议用spring注入的action，由spring创建的action可以进行aop管理 -->
+	<package name="staff-ssh" extends="struts-default" namespace="/">
+		<action name="product_*" class="productAction" method="{1}"></action>
 	</package>
 </struts>
