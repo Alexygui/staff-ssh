@@ -1,11 +1,14 @@
 package com.aaa.service;
 
+import javax.transaction.Transactional;
+
 import com.aaa.dao.ProductDao;
 import com.aaa.domain.Product;
 
 /**
  * 商品管理的业务层的类
  */
+@Transactional
 public class ProductService {
 	
 	// 业务层，注入DAO的类
